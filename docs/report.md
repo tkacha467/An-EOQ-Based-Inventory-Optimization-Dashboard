@@ -5,89 +5,101 @@
 
 ---
 
-## 1. Introduction
-Modern supply chain management requires balancing inventory holding costs against order execution expenses. In retail, hardware, and electronics distribution, inefficient inventory policy leads to working capital tie-ups or stockouts. This report details the technical architecture, mathematical model, and empirical results of the **Smart Inventory Advisor**, a Streamlit-based inventory optimization tool developed for MSc Data Science mini-hackathon evaluation.
+## 1. Introduction & Problem Statement
+Inventory management requires balancing ordering execution costs against inventory carrying costs. In modern supply chain operations, purchasing in excessively large batches inflates holding expenses and ties up working capital, while purchasing in tiny batches skyrockets shipping and administrative costs.
+
+The **Smart Inventory Advisor** is an enterprise analytics dashboard designed to process real supply chain data, calculate the **Economic Order Quantity (EOQ)**, **Reorder Point (ROP)**, and **Total Annual Inventory Cost**, providing quantitative replenishment guidance for supply chain decision-makers.
 
 ---
 
-## 2. Business Problem
-Organizations face a fundamental trade-off when purchasing inventory:
-- **Ordering Costs ($S$)**: Incurred per purchase order placed (freight, administrative overhead, inspection). Ordering in large quantities reduces the number of purchase orders and lowers total ordering costs.
-- **Holding Costs ($H$)**: Incurred per unit held in inventory per year (warehousing, insurance, depreciation, opportunity cost of capital). Ordering in large quantities inflates average inventory levels, increasing total holding costs.
-
-Without quantitative decision support, managers rely on ad-hoc order quantities, causing unnecessary inventory costs and stockout risk during supplier lead times.
-
----
-
-## 3. Objective
-The primary objectives of this project are:
-1. Develop an automated analytics engine (`eoq_model.py`) to compute optimal Economic Order Quantity (EOQ), annual order frequency, total inventory costs, and Reorder Point (ROP).
-2. Enforce strict input data validation against malformed, non-numeric, or non-positive records.
-3. Build an intuitive, interactive Streamlit dashboard (`app.py`) for decision-makers.
-4. Deliver actionable business recommendations driven dynamically by empirical optimization outputs.
+## 2. Business Objective
+1. Develop a mathematical backend (`eoq_model.py`) and data transformation pipeline (`data_pipeline.py`) to process real-world inventory data.
+2. Calculate optimal batch size (EOQ), order frequency, total annual cost, daily demand, and reorder threshold (ROP) for every SKU.
+3. Distinguish clearly between raw dataset inputs and derived cost assumptions.
+4. Render a SaaS-grade Streamlit visual interface (`app.py`) featuring high-level KPI cards, interactive Plotly cost-tradeoff curves, portfolio cost distributions, and dynamic business recommendations.
 
 ---
 
-## 4. Dataset Description
-The model accepts portfolio inventory data with five required columns:
-- **`Product`**: Identifier/name of the product.
-- **`Annual_Demand` ($D$)**: Total forecast units required per year.
-- **`Ordering_Cost` ($S$)**: Fixed cost per purchase order in USD.
-- **`Holding_Cost` ($H$)**: Annual holding cost per unit stored in USD.
-- **`Lead_Time_Days` ($L$)**: Supplier delivery lead time in days.
-
-The standard demonstration dataset (`data/inventory_data.csv`) contains six representative tech products:
-1. **Laptop**: Annual Demand = 1,200 units, Ordering Cost = $150.00, Holding Cost = $40.00, Lead Time = 7 days.
-2. **Monitor**: Annual Demand = 2,400 units, Ordering Cost = $100.00, Holding Cost = $20.00, Lead Time = 5 days.
-3. **Keyboard**: Annual Demand = 5,000 units, Ordering Cost = $50.00, Holding Cost = $5.00, Lead Time = 3 days.
-4. **Mouse**: Annual Demand = 6,000 units, Ordering Cost = $40.00, Holding Cost = $3.00, Lead Time = 3 days.
-5. **Printer**: Annual Demand = 800 units, Ordering Cost = $200.00, Holding Cost = $35.00, Lead Time = 10 days.
-6. **Headset**: Annual Demand = 3,000 units, Ordering Cost = $60.00, Holding Cost = $8.00, Lead Time = 4 days.
+## 3. Dataset Source & Metadata
+- **Source**: [Kaggle — High-Dimensional Supply Chain Inventory Dataset](https://www.kaggle.com/datasets/ziya07/high-dimensional-supply-chain-inventory-dataset)
+- **URL**: `https://www.kaggle.com/datasets/ziya07/high-dimensional-supply-chain-inventory-dataset`
+- **License**: CC0: Public Domain / Open Data
+- **Raw Row Count**: 100 records
+- **Unique SKU Count**: 100 SKUs across 3 categories (`Haircare`, `Skincare`, `Cosmetics`)
+- **Temporal Scope**: Annual operations
 
 ---
 
-## 5. Mathematical Model
-The inventory system operates under classic Economic Order Quantity assumptions:
-- Constant annual demand ($D$).
-- Constant supplier lead time ($L$).
-- Instantaneous order replenishment upon arrival.
-- No quantity discounts or stockout allowances.
+## 4. Dataset Description & Schema
+The raw Kaggle dataset contains 23 operational columns across supply chain dimensions:
+- `Product type`: Category (`Haircare`, `Skincare`, `Cosmetics`)
+- `SKU`: Unique Stock Keeping Unit Identifier (`SKU0` through `SKU99`)
+- `Price`: Unit selling price ($)
+- `Availability`: Current stock level
+- `Number of products sold`: Annual demand volume ($D$)
+- `Revenue generated`: Annual revenue ($)
+- `Stock levels`: On-hand inventory
+- `Lead times`: Supplier replenishment lead time in days ($L$)
+- `Order quantities`: Simulated order batch size
+- `Shipping times`: Transit lead time
+- `Shipping carriers`: Freight provider
+- `Shipping costs`: Fixed shipping cost per purchase order ($S$)
+- `Supplier name`: Supplier identifier
+- `Location`: Warehouse hub location
+- `Manufacturing costs`: Unit manufacturing/production cost ($C$)
+- `Inspection results`: Audit status (`Pass`, `Fail`, `Pending`)
+- `Defect rates`: Percentage defect rate
 
 ---
 
-## 6. EOQ Formula
-The optimal batch size ($EOQ$) minimizes the total annual inventory cost curve by balancing annual ordering cost against annual holding cost:
+## 5. Data Cleaning & Validation
+The ETL pipeline (`data_pipeline.py`) executes:
+1. **Duplicate Filtering**: Drops exact duplicate rows.
+2. **Type Enforcement**: Converts demand, shipping cost, manufacturing cost, and lead times to numeric `float` types.
+3. **Data Scrubbing**: Removes nulls, zero values, or negative numbers across essential fields.
+4. **Validation Check**: Invokes `eoq_model.validate_input_dataframe()` to verify schema integrity.
+
+---
+
+## 6. Data Transformation & Field Mapping
+To connect raw Kaggle operational data with the EOQ model:
+
+| EOQ Input Field | Mapped Kaggle Dataset Field | Derivation Status | Mathematical & Business Rationale |
+|---|---|---|---|
+| **`Product`** | `SKU` + `Product type` | **RAW MAPPED** | Combines SKU ID with category (e.g. `SKU0 (Skincare)`) for clear identification. |
+| **`Annual_Demand` ($D$)** | `Number of products sold` | **RAW MAPPED** | Total annual units sold per SKU. |
+| **`Ordering_Cost` ($S$)** | `Shipping costs` | **RAW MAPPED** | Fixed shipping and freight expense incurred per purchase order placed. |
+| **`Holding_Cost` ($H$)** | `Manufacturing costs` $\times 0.20$ | **DERIVED** | **Assumption**: $H = i \times C$, where $i=20\%$ is the standard annual carrying cost rate (capital, storage, insurance, obsolescence) applied to unit manufacturing cost $C$. |
+| **`Lead_Time_Days` ($L$)** | `Lead times` | **RAW MAPPED** | Supplier delivery lead time in calendar days. |
+
+---
+
+## 7. EOQ Mathematical Model
+The optimal order quantity ($\text{EOQ}$) minimizes the sum of annual ordering and holding costs:
 
 $$\text{EOQ} = \sqrt{\frac{2 \cdot D \cdot S}{H}}$$
 
-Where:
-- $D$ = Annual Demand (units/year)
-- $S$ = Ordering Cost ($/order)
-- $H$ = Holding Cost ($/unit/year)
-
-At the exact point where $Q = \text{EOQ}$, **Annual Ordering Cost equals Annual Holding Cost**.
+At $Q = \text{EOQ}$, **Annual Ordering Cost equals Annual Holding Cost**.
 
 ---
 
-## 7. Inventory Cost Calculations
-From the optimal order quantity $\text{EOQ}$, the secondary metrics are calculated:
+## 8. Mathematical Inventory Formulas
+- **Number of Orders per Year**:
+  $$\text{Orders/Year} = \frac{D}{\text{EOQ}}$$
 
-1. **Number of Orders per Year**:
-   $$\text{Orders/Year} = \frac{D}{\text{EOQ}}$$
+- **Annual Ordering Cost**:
+  $$\text{Annual Ordering Cost} = \left(\frac{D}{\text{EOQ}}\right) \times S$$
 
-2. **Annual Ordering Cost**:
-   $$\text{Annual Ordering Cost} = \left(\frac{D}{\text{EOQ}}\right) \times S$$
+- **Annual Holding Cost**:
+  $$\text{Annual Holding Cost} = \left(\frac{\text{EOQ}}{2}\right) \times H$$
 
-3. **Annual Holding Cost**:
-   $$\text{Annual Holding Cost} = \left(\frac{\text{EOQ}}{2}\right) \times H$$
-
-4. **Total Annual Inventory Cost**:
-   $$\text{Total Annual Cost} = \text{Annual Ordering Cost} + \text{Annual Holding Cost}$$
+- **Total Annual Inventory Cost**:
+  $$\text{Total Annual Cost} = \text{Annual Ordering Cost} + \text{Annual Holding Cost}$$
 
 ---
 
-## 8. Reorder Point
-To prevent stockouts while waiting for supplier deliveries, replenishment purchase orders must be placed when stock reaches the Reorder Point ($\text{ROP}$):
+## 9. Reorder Point (ROP) Model
+To guarantee stock availability during supplier lead time $L$:
 
 $$\text{Daily Demand} = \frac{D}{365}$$
 
@@ -95,93 +107,80 @@ $$\text{Reorder Point (ROP)} = \text{Daily Demand} \times L$$
 
 ---
 
-## 9. System Architecture
-The application adheres to a modular, standard Python project architecture:
-
+## 10. System Architecture
 ```text
-An-EOQ-Based-Inventory-Optimization-Dashboard/
-├── app.py                  # Streamlit visual dashboard & UI
-├── eoq_model.py            # Core analytics engine & validation rules
-├── test_eoq_model.py       # Automated unit test suite (9 test cases)
-├── requirements.txt        # Package dependencies
-├── README.md               # Quickstart setup & usage guide
-├── data/
-│   └── inventory_data.csv  # 6-product sample dataset
-└── docs/
-    └── report.md           # Technical & executive documentation
+RAW KAGGLE CSV (100 SKUs)
+         ↓
+data_pipeline.py (ETL Cleaning & Derivations)
+         ↓
+eoq_model.py (Vectorized NumPy/pandas Calculation)
+         ↓
+app.py (Streamlit SaaS Dashboard UI)
 ```
 
 ---
 
-## 10. Implementation
-The core computational module (`eoq_model.py`) includes two core functions:
-1. `validate_input_dataframe(df)`: Enforces schema completeness, converts data types safely, and verifies strictly positive values ($> 0$).
-2. `calculate_eoq(df)`: Executes vectorized NumPy/pandas calculations for all inventory metrics across the portfolio.
-3. `calculate_cost_tradeoff(annual_demand, ordering_cost, holding_cost)`: Generates continuous order quantity arrays ranging from 20% to 200% of EOQ for plotting tradeoff curves.
+## 11. Implementation & Test Suite
+- `eoq_model.py`: Implements `validate_input_dataframe()`, `calculate_eoq()`, and `calculate_cost_tradeoff()`.
+- `test_eoq_model.py`: Automated test suite containing **10 unit tests** covering validation errors, calculation precision, and pipeline transformations. All 10 tests pass in 0.040s.
 
 ---
 
-## 11. Streamlit Dashboard
-The front-end user interface (`app.py`) features:
-- **Sidebar Input**: CSV file uploader with automated fallback to `data/inventory_data.csv`, plus dynamic product dropdown selection.
-- **Top Metric Cards**: Real-time display of selected product's EOQ, Annual Orders, Total Annual Cost, and Reorder Point.
-- **Formated Summary Table**: Full summary table listing all original and computed metrics across all products, rounded to 2 decimal places.
-- **Plotly Visualizations**: Interactive cost-curve line plot and cross-product bar chart.
-- **Dynamic Business Insights & Recommendations**: Textual guidance calculated on the fly.
+## 12. Dashboard Architecture
+The Streamlit interface (`app.py`) follows a non-intrusive SaaS layout:
+- **Header**: Status badge and data source information expander.
+- **Top KPI Cards**: Total Active SKUs (100), Average EOQ (456.9 units), Total Portfolio Cost ($44,228.32), High-Cost Focus SKUs count.
+- **Interactive Visualizations**: High on the page (EOQ Cost Tradeoff curve and Top 15 SKU Cost bar chart).
+- **Business Insights & Recommendations**: Dynamic bullet points highlighting specific SKUs.
+- **Data Explorer**: Searchable, sortable table located at the bottom of the dashboard.
 
 ---
 
-## 12. Results
-Below are the actual calculated results generated by running `eoq_model.py` on `data/inventory_data.csv`:
+## 13. Results (Sample Processed SKUs)
 
-| Product | Demand ($D$) | Order Cost ($S$) | Hold Cost ($H$) | Lead Time ($L$) | EOQ (Units) | Orders/Yr | Annual Order Cost ($) | Annual Hold Cost ($) | Total Annual Cost ($) | Daily Demand | Reorder Point |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| **Laptop** | 1,200 | $150.00 | $40.00 | 7 days | **94.87** | 12.65 | $1,897.37 | $1,897.37 | **$3,794.73** | 3.29 | **23.01** |
-| **Monitor** | 2,400 | $100.00 | $20.00 | 5 days | **154.92** | 15.49 | $1,549.19 | $1,549.19 | **$3,098.39** | 6.58 | **32.88** |
-| **Keyboard** | 5,000 | $50.00 | $5.00 | 3 days | **316.23** | 15.81 | $790.57 | $790.57 | **$1,581.14** | 13.70 | **41.10** |
-| **Mouse** | 6,000 | $40.00 | $3.00 | 3 days | **400.00** | 15.00 | $600.00 | $600.00 | **$1,200.00** | 16.44 | **49.32** |
-| **Printer** | 800 | $200.00 | $35.00 | 10 days | **95.62** | 8.37 | $1,673.32 | $1,673.32 | **$3,346.64** | 2.19 | **21.92** |
-| **Headset** | 3,000 | $60.00 | $8.00 | 4 days | **212.13** | 14.14 | $848.53 | $848.53 | **$1,697.06** | 8.22 | **32.88** |
+| Product | Demand ($D$) | Shipping Cost ($S$) | Hold Cost ($H$) | Lead Time ($L$) | EOQ (Units) | Orders/Yr | Total Annual Cost ($) | Reorder Point |
+|---|---|---|---|---|---|---|---|---|
+| **SKU0 (Skincare)** | 7,443 | $22.28 | $1.442 | 24 days | **479.79** | 15.51 | **$690.62** | **489.40** |
+| **SKU1 (Cosmetics)** | 7,306 | $29.46 | $5.060 | 1 day | **291.68** | 25.05 | **$1,475.76** | **20.02** |
+| **SKU2 (Skincare)** | 5,696 | $45.79 | $2.574 | 6 days | **450.31** | 12.65 | **$1,159.20** | **93.63** |
+| **SKU3 (Skincare)** | 5,901 | $33.09 | $6.262 | 21 days | **249.77** | 23.63 | **$1,563.85** | **339.51** |
+| **SKU4 (Haircare)** | 2,906 | $10.26 | $10.650 | 6 days | **74.92** | 38.79 | **$797.87** | **47.77** |
 
 **Portfolio Totals**:
-- Total Portfolio Annual Inventory Cost: **$14,717.95**
+- **Total SKUs**: 100
+- **Total Portfolio Annual Inventory Cost**: **$44,228.32**
 
 ---
 
-## 13. Visualization
-1. **Cost Trade-Off Chart (Plotly)**: Demonstrates that at $Q < \text{EOQ}$, ordering costs dominate, while at $Q > \text{EOQ}$, holding costs dominate. The red dotted vertical line clearly indicates the optimal batch size where total cost is minimized.
-2. **Product Cost Comparison Chart (Plotly Bar)**: Shows the distribution of total annual inventory costs across products, making high-impact items immediately visible to procurement teams.
+## 14. Visualization
+1. **Cost Trade-Off Curve**: Confirms that ordering cost declines hyper-bolically with batch size while holding cost increases linearly. The intersection marks the exact optimal EOQ point.
+2. **Top SKU Cost Bar Chart**: Identifies portfolio cost concentrations, highlighting top financial commitments for inventory optimization.
 
 ---
 
-## 14. Business Insights
-- **Highest Inventory Cost Driver**: **Laptop** accounts for the highest single annual inventory cost at **$3,794.73**, driven by high holding costs ($40.00/unit/year) and high ordering costs ($150.00/order).
-- **Lowest Inventory Cost Driver**: **Mouse** exhibits the lowest annual inventory cost at **$1,200.00**, despite having the highest demand (6,000 units), due to a very low unit holding cost ($3.00/unit/year).
-- **Equilibrium Verification**: Across all products, calculated Annual Ordering Cost exactly equals Annual Holding Cost at EOQ, verifying mathematical optimization.
+## 15. Business Insights
+- **Cost Driver Identification**: Inventory costs in the dataset vary significantly based on SKU-specific manufacturing costs ($C$) and shipping expenses ($S$).
+- **Holding vs. Ordering Balance**: SKUs with high unit manufacturing cost require smaller EOQ batch sizes to avoid excessive capital tie-up.
+- **Lead Time Risk**: SKUs with lead times up to 24–28 days require higher reorder points to prevent stockouts.
 
 ---
 
-## 15. Recommendation
-Based on calculated optimization metrics:
-1. **Batch Size Strategy for Laptop**: Order in lots of approximately **95 units** (94.87) per cycle, placing approximately **13 orders per year** (12.65).
-2. **Replenishment Threshold for Laptop**: Trigger stock reorders when physical inventory drops to **23 units** (23.01) to cover demand during the **7-day lead time**.
-3. **Strategic Cost Reduction**: Focus vendor negotiations on **Laptop** and **Printer** to reduce unit holding costs or fixed order costs, as these two products represent over 48% of total portfolio inventory costs.
+## 16. Actionable Recommendation
+1. **Procurement Execution**: Order exactly the calculated **EOQ units** for each selected SKU per replenishment cycle.
+2. **Reorder Triggers**: Automate purchase order triggers in inventory management software when stock reaches the calculated **Reorder Point (ROP)**.
+3. **Carrying Rate Sensitivity**: Periodically review the 20% annual inventory carrying cost rate ($i$) as warehouse overhead or interest rates change.
 
 ---
 
-## 16. Limitations
-- **Constant Demand Assumption**: Real-world demand fluctuates stochastically.
-- **Fixed Lead Times**: Supplier delays are not modeled.
-- **No Safety Stock**: The basic EOQ model assumes zero demand variance during lead time.
+## 17. Limitations
+- **Constant Demand Assumption**: Annual demand is assumed steady throughout 365 days.
+- **Derived Carrying Rate**: Holding cost relies on an assumed 20% annual carrying rate applied to manufacturing cost ($H = 0.20 \times C$).
 
 ---
 
-## 17. Conclusion
-The **Smart Inventory Advisor** successfully fulfills all hackathon requirements. By automating EOQ and ROP calculations and presenting results through an interactive Streamlit application, it empowers inventory managers to minimize holding and ordering expenses scientifically.
+## 18. Conclusion & Future Enhancements
+The **Smart Inventory Advisor** successfully integrates real-world Kaggle supply chain data into a validated mathematical EOQ model delivered through a SaaS Streamlit interface. 
 
----
-
-## 18. Future Enhancement
-1. **Safety Stock Integration**: Incorporate demand variability ($\sigma_D$) and lead-time variance to compute dynamic safety stock ($Z \times \sigma_D \times \sqrt{L}$).
-2. **Quantity Discounts**: Extend the algorithm to evaluate volume breaks offered by suppliers.
-3. **Multi-Criteria ABC Analysis**: Categorize inventory by dollar-volume usage to streamline stock audits.
+**Future Enhancements**:
+1. Incorporate safety stock based on demand variance ($Z \times \sigma_D \times \sqrt{L}$).
+2. Integrate real-time supplier API webhooks for dynamic lead time updates.
