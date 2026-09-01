@@ -1,7 +1,7 @@
 """
 Smart Inventory Advisor - Streamlit Frontend Application
 EOQ-Based Inventory Optimization Dashboard for MOM Mini-Hackathon.
-Faculty Guide: Prof. Rushika Ma'am | Course: MSc Data Science (Sem 3)
+Faculty Guide: Prof. Rushika Patt | Course: MSc Data Science (Sem 3)
 Team: Tushar Pankajbhai Kacha (92500567015), Isha Kakadiya (92500567016), Kaushik Ajani (92500567020)
 """
 
@@ -332,7 +332,7 @@ st.markdown(f"""
         <span class="logo-badge"><i class="fa-solid fa-boxes-stacked"></i> SMART EOQ</span>
         <div>
             <div class="brand-title">Smart Inventory Advisor & Decision Support</div>
-            <div class="brand-sub">MOM Mini-Hackathon | Faculty Guide: Prof. Rushika Ma'am | MSc DS (Sem 3)</div>
+            <div class="brand-sub">MOM Mini-Hackathon | Faculty Guide: Prof. Rushika Patt | MSc DS (Sem 3)</div>
         </div>
     </div>
     <div style="display:flex; align-items:center; gap: 0.8rem;">
@@ -346,7 +346,7 @@ st.markdown(f"""
 st.markdown(f"""
 <div class="meta-pill-container">
     <span class="meta-pill highlight"><i class="fa-solid fa-trophy"></i> MOM Mini-Hackathon</span>
-    <span class="meta-pill"><i class="fa-solid fa-user-tie"></i> Faculty Guide: Prof. Rushika Ma'am</span>
+    <span class="meta-pill"><i class="fa-solid fa-user-tie"></i> Faculty Guide: Prof. Rushika Patt</span>
     <span class="meta-pill"><i class="fa-solid fa-graduation-cap"></i> MSc Data Science (Sem 3)</span>
 </div>
 
@@ -367,7 +367,7 @@ st.markdown(f"""
     Powered by EOQ Engine
 </h1>
 <p class="hero-subtitle">
-    An intelligent operations management decision framework balancing purchase ordering costs against inventory holding carrying expenses. Developed for the MOM Mini-Hackathon (MSc Data Science, Sem 3) under the guidance of Prof. Rushika Ma'am.
+    An intelligent operations management decision framework balancing purchase ordering costs against inventory holding carrying expenses. Developed for the MOM Mini-Hackathon (MSc Data Science, Sem 3) under the guidance of Prof. Rushika Patt.
 </p>
 
 <div class="category-badges">

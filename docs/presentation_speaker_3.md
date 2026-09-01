@@ -1,6 +1,6 @@
 # 🎙️ Presentation Script — Speaker 3: Live Demo, Key Learnings & Conclusion
 **Speaker**: Kaushik Ajani (Student ID: `92500567020`)  
-**Faculty Evaluator**: Prof. Rushika Ma'am  
+**Faculty Evaluator**: Prof. Rushika Patt  
 **Course & Event**: MOM Mini-Hackathon (MSc Data Science, Sem 3)  
 **Duration**: 2.5 to 3 Minutes (~350 - 400 words)  
 **Slides Covered**: Slide 5 (Live Demo), Slide 6 (Metrics & Plots) & Slide 7 (Defense Prep)
@@ -10,7 +10,7 @@
 ## 📜 Word-for-Word Speech Script
 
 ### 1. Live Interactive Demonstration (0:00 - 1:00)
-> *"Thank you, Isha. Respected Prof. Rushika Ma'am and classmates, I am **Kaushik Ajani**, and I will demonstrate our live system in action and summarize our findings.*
+> *"Thank you, Isha. Respected Prof. Rushika Patt and classmates, I am **Kaushik Ajani**, and I will demonstrate our live system in action and summarize our findings.*
 >
 > *As you can see on Slide 5, our **Live EOQ & Reorder Point Calculator** allows supply chain managers to select any SKU preset from our 100 real Kaggle SKUs or manually enter custom parameters.*
 >
@@ -36,7 +36,7 @@
 >
 > *In conclusion, the Smart Inventory Advisor empowers organizations to minimize inventory expenses, eliminate stockouts, and make data-driven supply chain decisions.*
 >
-> *Thank you, Prof. Rushika Ma'am and classmates, for your time. We are now ready to take any questions!"*
+> *Thank you, Prof. Rushika Patt and classmates, for your time. We are now ready to take any questions!"*
 
 ---
 
@@ -44,4 +44,4 @@
 - [ ] Interact with Slide 5 live controls or demonstrate the calculator on screen.
 - [ ] Point out the U-shaped total cost curve on Slide 6.
 - [ ] Confidently state the 3 Key Learnings (Operations Theory, Data Engineering, Software Craftsmanship).
-- [ ] End with a clear invitation for Q&A to Prof. Rushika Ma'am.
+- [ ] End with a clear invitation for Q&A to Prof. Rushika Patt.

@@ -1,6 +1,6 @@
 # 🎙️ Presentation Script — Speaker 2: Mathematical Model, Data Pipeline & Tech Stack
 **Speaker**: Isha Kakadiya (Student ID: `92500567016`)  
-**Faculty Evaluator**: Prof. Rushika Ma'am  
+**Faculty Evaluator**: Prof. Rushika Patt  
 **Course & Event**: MOM Mini-Hackathon (MSc Data Science, Sem 3)  
 **Duration**: 2.5 to 3 Minutes (~350 - 400 words)  
 **Slides Covered**: Slide 3 (Architecture & Formulas) & Slide 4 (Code Inspector)
@@ -10,7 +10,7 @@
 ## 📜 Word-for-Word Speech Script
 
 ### 1. Mathematical Formulation & EOQ Model (0:00 - 1:00)
-> *"Thank you, Tushar. Respected Prof. Rushika Ma'am and classmates, I am **Isha Kakadiya**, and I will walk you through the mathematical engine and technical architecture of our system.*
+> *"Thank you, Tushar. Respected Prof. Rushika Patt and classmates, I am **Isha Kakadiya**, and I will walk you through the mathematical engine and technical architecture of our system.*
 >
 > *At the heart of our backend is the classical **Economic Order Quantity (EOQ)** model. The total annual inventory cost equation is:
 > $$TC = \left(\frac{D}{Q} \cdot S\right) + \left(\frac{Q}{2} \cdot H\right)$$

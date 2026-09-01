@@ -1,7 +1,7 @@
 # Smart Inventory Advisor: Technical & Executive Report
 **Course**: MSc Data Science — Modelling in Operations Management (05MD0302), Semester 3  
 **Event**: MOM Mini-Hackathon  
-**Faculty Guide**: Prof. Rushika Ma'am  
+**Faculty Guide**: Prof. Rushika Patt  
 **Team Members**:
 1. **Tushar Pankajbhai Kacha** (Student ID: `92500567015`)
 2. **Isha Kakadiya** (Student ID: `92500567016`)
@@ -13,7 +13,7 @@
 ## 1. Introduction & Problem Statement
 Inventory management requires balancing ordering execution costs against inventory carrying costs. In modern supply chain operations, purchasing in excessively large batches inflates holding expenses and ties up working capital, while purchasing in tiny batches skyrockets shipping and administrative costs.
 
-The **Smart Inventory Advisor** is an enterprise analytics dashboard designed for the MOM Mini-Hackathon under the guidance of Prof. Rushika Ma'am. It processes real supply chain data, calculates the **Economic Order Quantity (EOQ)**, **Reorder Point (ROP)**, and **Total Annual Inventory Cost**, providing quantitative replenishment guidance for supply chain decision-makers.
+The **Smart Inventory Advisor** is an enterprise analytics dashboard designed for the MOM Mini-Hackathon under the guidance of Prof. Rushika Patt. It processes real supply chain data, calculates the **Economic Order Quantity (EOQ)**, **Reorder Point (ROP)**, and **Total Annual Inventory Cost**, providing quantitative replenishment guidance for supply chain decision-makers.
 
 ---
 
@@ -133,7 +133,7 @@ Dual Interface: app.py (Streamlit) & index.html (Light Presentation Frontend)
 
 ## 12. Dashboard Architecture
 The interface follows a SaaS layout:
-- **Header**: Team member badges (`Tushar`, `Isha`, `Kaushik`), Faculty guide (`Prof. Rushika Ma'am`), and event tag (`MOM Mini-Hackathon`).
+- **Header**: Team member badges (`Tushar`, `Isha`, `Kaushik`), Faculty guide (`Prof. Rushika Patt`), and event tag (`MOM Mini-Hackathon`).
 - **Top KPI Cards**: Total Active SKUs (100), Average EOQ (456.9 units), Total Portfolio Cost ($44,228.32), High-Cost Focus SKUs count.
 - **Interactive Visualizations**: High on the page (EOQ Cost Tradeoff curve and Top 15 SKU Cost bar chart).
 - **Business Insights & Recommendations**: Dynamic bullet points highlighting specific SKUs.
@@ -154,4 +154,4 @@ The interface follows a SaaS layout:
 ---
 
 ## 14. Conclusion
-The **Smart Inventory Advisor** successfully integrates real-world Kaggle supply chain data into a validated mathematical EOQ model delivered through a responsive frontend designed for the MSc Data Science MOM Mini-Hackathon under the guidance of Prof. Rushika Ma'am.
+The **Smart Inventory Advisor** successfully integrates real-world Kaggle supply chain data into a validated mathematical EOQ model delivered through a responsive frontend designed for the MSc Data Science MOM Mini-Hackathon under the guidance of Prof. Rushika Patt.

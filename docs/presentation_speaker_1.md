@@ -1,6 +1,6 @@
 # 🎙️ Presentation Script — Speaker 1: Problem Definition & Business Context
 **Speaker**: Tushar Pankajbhai Kacha (Student ID: `92500567015`)  
-**Faculty Evaluator**: Prof. Rushika Ma'am  
+**Faculty Evaluator**: Prof. Rushika Patt  
 **Course & Event**: MOM Mini-Hackathon (MSc Data Science, Sem 3)  
 **Duration**: 2.5 to 3 Minutes (~350 - 400 words)  
 **Slides Covered**: Slide 1 (Overview) & Slide 2 (Motivation)
@@ -10,7 +10,7 @@
 ## 📜 Word-for-Word Speech Script
 
 ### 1. Welcome & Introduction (0:00 - 0:45)
-> *"Respected Prof. Rushika Ma'am and fellow classmates, good morning. Welcome to our MSc Data Science Operations Management mini-hackathon presentation. I am **Tushar Pankajbhai Kacha**, presenting alongside my team members **Isha Kakadiya** and **Kaushik Ajani**.*
+> *"Respected Prof. Rushika Patt and fellow classmates, good morning. Welcome to our MSc Data Science Operations Management mini-hackathon presentation. I am **Tushar Pankajbhai Kacha**, presenting alongside my team members **Isha Kakadiya** and **Kaushik Ajani**.*
 >
 > *Today, we are excited to showcase our project: **The Smart Inventory Advisor** — an enterprise-grade inventory optimization dashboard powered by real-world supply chain data.*
 >
@@ -41,6 +41,6 @@
 ---
 
 ## 🎯 Quick Delivery Checklist for Speaker 1 (Tushar)
-- [ ] Greet Prof. Rushika Ma'am and state all 3 team member names clearly.
+- [ ] Greet Prof. Rushika Patt and state all 3 team member names clearly.
 - [ ] Emphasize the two opposing forces: **Ordering Cost** vs. **Holding Cost**.
 - [ ] Point to Slide 1 & Slide 2 on the screen when introducing the 100-SKU Kaggle dataset.

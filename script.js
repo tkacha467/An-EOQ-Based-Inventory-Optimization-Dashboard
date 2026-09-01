@@ -1,6 +1,6 @@
 /* ==========================================================================
    Smart Inventory Advisor - Interactive Presentation & Dashboard Engine
-   MOM Mini-Hackathon | MSc Data Science (Semester 3) | Guide: Prof. Rushika Ma'am
+   MOM Mini-Hackathon | MSc Data Science (Semester 3) | Guide: Prof. Rushika Patt
    Team: Tushar Pankajbhai Kacha (92500567015), Isha Kakadiya (92500567016), Kaushik Ajani (92500567020)
    ========================================================================== */
 
@@ -72,7 +72,7 @@ import pandas as pd
 def calculate_eoq(df: pd.DataFrame) -> pd.DataFrame:
     """
     MOM Mini-Hackathon - EOQ Optimization Engine
-    Faculty Guide: Prof. Rushika Ma'am
+    Faculty Guide: Prof. Rushika Patt
     Team: Tushar Kacha (015), Isha Kakadiya (016), Kaushik Ajani (020)
     """
     validate_input_dataframe(df)
