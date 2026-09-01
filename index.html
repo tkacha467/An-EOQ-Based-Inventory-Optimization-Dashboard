@@ -19,10 +19,10 @@
 </head>
 <body class="slide-mode">
 
-    <!-- Top Navigation Bar -->
+    <!-- Top Navigation Bar (Strict 1-Line Layout) -->
     <nav class="navbar">
         <div class="nav-brand">
-            <span class="logo-badge"><i class="fa-solid fa-boxes-packing"></i> EOQ-SMART</span>
+            <span class="logo-badge"><i class="fa-solid fa-boxes-stacked"></i> SMART EOQ</span>
             <div>
                 <div class="brand-title">Smart Inventory Advisor</div>
                 <div class="brand-sub">Tushar Pankajbhai Kacha (ID: 92500567015) | MSc Data Science</div>
@@ -129,7 +129,7 @@
                             </div>
                             <div class="glass-card" style="padding: 1rem 1.25rem; border-color: var(--accent-emerald);">
                                 <div style="font-weight: 700; color: var(--accent-emerald);"><i class="fa-solid fa-shield-halved"></i> EOQ Data-Driven Optimization</div>
-                                <div style="font-size: 0.85rem; color: var(--text-secondary);">Mathematical minimum total cost batch size where Annual Ordering Cost exactly equals Annual Holding Cost ($Q^* = \sqrt{2DS/H}$).</div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">Mathematical minimum total cost batch size where Annual Ordering Cost equals Annual Holding Cost (Q* = √(2DS/H)).</div>
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
                             </li>
                             <li style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
                                 <span style="color: var(--text-secondary);">Derived Carrying Rate (i):</span>
-                                <span style="font-weight: 600;">20% Annual Carrying Cost Rate ($H = i \times C$)</span>
+                                <span style="font-weight: 600;">20% Annual Carrying Cost Rate (H = i × C)</span>
                             </li>
                             <li style="display: flex; justify-content: space-between;">
                                 <span style="color: var(--text-secondary);">Operating Days / Year:</span>
@@ -243,7 +243,7 @@
                             <h3 style="font-size: 1.15rem; margin-bottom: 1rem; color: var(--accent-emerald);"><i class="fa-solid fa-microchip"></i> Mathematical Execution Flow</h3>
                             <ul id="codeStepList" style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
                                 <li class="code-step-item active"><i class="fa-solid fa-circle-check" style="color:var(--accent-emerald);"></i> Step 1: Validate Required DataFrame Schema</li>
-                                <li class="code-step-item"><i class="fa-solid fa-circle-check" style="color:var(--accent-emerald);"></i> Step 2: Compute Vectorized EOQ Lot Size ($Q^*$)</li>
+                                <li class="code-step-item"><i class="fa-solid fa-circle-check" style="color:var(--accent-emerald);"></i> Step 2: Compute Vectorized EOQ Lot Size (Q*)</li>
                                 <li class="code-step-item"><i class="fa-solid fa-circle-check" style="color:var(--accent-emerald);"></i> Step 3: Compute Annual Ordering & Holding Costs</li>
                                 <li class="code-step-item"><i class="fa-solid fa-circle-check" style="color:var(--accent-emerald);"></i> Step 4: Calculate Daily Demand & Reorder Point (ROP)</li>
                                 <li class="code-step-item"><i class="fa-solid fa-circle-check" style="color:var(--accent-emerald);"></i> Step 5: Execute 10 Automated Unit Tests</li>
@@ -292,14 +292,14 @@
                             </div>
                         </div>
 
-                        <button id="btnRecalculate" class="btn-mode-toggle" style="width: 100%; margin-top: 1.25rem; justify-content: center; background: linear-gradient(135deg, #059669, #10b981);">
+                        <button id="btnRecalculate" class="btn-mode-toggle" style="width: 100%; margin-top: 1.25rem; justify-content: center; background: linear-gradient(135deg, #059669, #10b981); color: white;">
                             <i class="fa-solid fa-calculator"></i> Run Optimization Calculation
                         </button>
                     </div>
 
                     <div>
                         <div class="glass-card" style="border-top: 4px solid var(--accent-emerald);">
-                            <h3 style="font-size: 1.15rem; margin-bottom: 1rem; color: var(--accent-emerald);"><i class="fa-solid fa-chart-line"></i> Optimization Results</h3>
+                            <h3 style="font-size: 1.15rem; margin-bottom: 1rem; color: var(--accent-emerald);"><i class="fa-solid fa-chart-line"></i> Live Optimization Results</h3>
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
                                 <div style="background: #f8fafc; padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
@@ -321,7 +321,7 @@
                             </div>
 
                             <div style="background: #ecfdf5; border-left: 4px solid var(--accent-emerald); padding: 0.85rem 1rem; border-radius: var(--radius-sm);">
-                                <div style="font-weight: 700; color: var(--accent-emerald); font-size: 0.85rem;"><i class="fa-solid fa-bullseye"></i> Operational Recommendation</div>
+                                <div style="font-weight: 700; color: var(--accent-emerald); font-size: 0.85rem;"><i class="fa-solid fa-bullseye"></i> Live Operational Recommendation</div>
                                 <div id="resRecommendation" style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.25rem;">
                                     Place purchase orders of 479.79 units whenever stock levels reach 489.40 units.
                                 </div>
@@ -373,7 +373,7 @@
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
                         <div class="viva-answer">
-                            The primary objective of the EOQ model is to find the optimal order lot size ($Q^*$) that minimizes the total annual inventory cost ($TC$), which is the sum of annual ordering costs and annual holding costs. At $Q^*$, Annual Ordering Cost ($D/Q \cdot S$) exactly equals Annual Holding Cost ($Q/2 \cdot H$).
+                            The primary objective of the EOQ model is to find the optimal order lot size (Q*) that minimizes the total annual inventory cost (TC), which is the sum of annual ordering costs and annual holding costs. At Q*, Annual Ordering Cost (D/Q × S) exactly equals Annual Holding Cost (Q/2 × H).
                         </div>
                     </div>
 
@@ -383,17 +383,17 @@
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
                         <div class="viva-answer">
-                            $\text{ROP} = \text{Daily Demand} \times \text{Lead Time Days} = (D / 365) \cdot L$. Lead time is critical because it represents the time required for a supplier to process, package, and deliver a purchase order. Placing an order at ROP ensures new inventory arrives exactly as on-hand inventory reaches zero, preventing stockouts.
+                            ROP = Daily Demand × Lead Time Days = (D / 365) × L. Lead time is critical because it represents the time required for a supplier to process, package, and deliver a purchase order. Placing an order at ROP ensures new inventory arrives exactly as on-hand inventory reaches zero, preventing stockouts.
                         </div>
                     </div>
 
                     <div class="viva-card">
                         <div class="viva-question" onclick="this.parentElement.classList.toggle('active')">
-                            <span><i class="fa-solid fa-circle-question" style="color:var(--accent-indigo);"></i> Q3: Why is Holding Cost ($H$) derived as a percentage of unit manufacturing cost?</span>
+                            <span><i class="fa-solid fa-circle-question" style="color:var(--accent-indigo);"></i> Q3: Why is Holding Cost (H) derived as a percentage of unit manufacturing cost?</span>
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
                         <div class="viva-answer">
-                            In inventory management theory, holding cost per unit per year is standardly computed as $H = i \cdot C$, where $i$ is the annual carrying cost rate (typically 15%–25%, default 20% per year for capital tie-up, storage overhead, insurance, and obsolescence) and $C$ is the unit manufacturing/purchase cost.
+                            In inventory management theory, holding cost per unit per year is standardly computed as H = i × C, where i is the annual carrying cost rate (typically 15%–25%, default 20% per year for capital tie-up, storage overhead, insurance, and obsolescence) and C is the unit manufacturing/purchase cost.
                         </div>
                     </div>
 
@@ -403,7 +403,7 @@
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
                         <div class="viva-answer">
-                            We implemented an automated unit test suite (`test_eoq_model.py`) containing 10 rigorous test cases verifying schema validation, zero/negative rejection, EOQ calculation precision, holding/ordering cost equity at $Q^*$, ROP calculation, and data pipeline transformation. All 10 tests pass in 0.040s.
+                            We implemented an automated unit test suite (`test_eoq_model.py`) containing 10 rigorous test cases verifying schema validation, zero/negative rejection, EOQ calculation precision, holding/ordering cost equity at Q*, ROP calculation, and data pipeline transformation. All 10 tests pass in 0.040s.
                         </div>
                     </div>
                 </div>
