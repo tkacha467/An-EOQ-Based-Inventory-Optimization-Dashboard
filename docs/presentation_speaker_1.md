@@ -1,5 +1,7 @@
 # 🎙️ Presentation Script — Speaker 1: Problem Definition & Business Context
-**Speaker**: Team Member 1 (Introduction, Core Problem, & Scope)  
+**Speaker**: Tushar Pankajbhai Kacha (Student ID: `92500567015`)  
+**Faculty Evaluator**: Prof. Rushika Ma'am  
+**Course & Event**: MOM Mini-Hackathon (MSc Data Science, Sem 3)  
 **Duration**: 2.5 to 3 Minutes (~350 - 400 words)  
 **Slides Covered**: Slide 1 (Overview) & Slide 2 (Motivation)
 
@@ -8,7 +10,7 @@
 ## 📜 Word-for-Word Speech Script
 
 ### 1. Welcome & Introduction (0:00 - 0:45)
-> *"Respected Professor and fellow classmates, good morning. Welcome to our MSc Data Science Operations Management presentation. I am [Speaker 1 Name], presenting alongside my team members [Speaker 2 Name] and [Speaker 3 Name].*
+> *"Respected Prof. Rushika Ma'am and fellow classmates, good morning. Welcome to our MSc Data Science Operations Management mini-hackathon presentation. I am **Tushar Pankajbhai Kacha**, presenting alongside my team members **Isha Kakadiya** and **Kaushik Ajani**.*
 >
 > *Today, we are excited to showcase our project: **The Smart Inventory Advisor** — an enterprise-grade inventory optimization dashboard powered by real-world supply chain data.*
 >
@@ -34,11 +36,11 @@
 >
 > *Our system calculates the exact **Economic Order Quantity (EOQ)** — the precise order batch size that minimizes total annual inventory costs — as well as the **Reorder Point (ROP)** to prevent lead-time stockouts.*
 >
-> *Now, I will hand over to my teammate, [Speaker 2 Name], who will explain our mathematical formulation, data pipeline, and technical implementation."*
+> *Now, I will hand over to my teammate, **Isha Kakadiya**, who will explain our mathematical formulation, data pipeline, and technical implementation."*
 
 ---
 
-## 🎯 Quick Delivery Checklist for Speaker 1
-- [ ] Maintain steady eye contact and clear pacing (~130 words/minute).
+## 🎯 Quick Delivery Checklist for Speaker 1 (Tushar)
+- [ ] Greet Prof. Rushika Ma'am and state all 3 team member names clearly.
 - [ ] Emphasize the two opposing forces: **Ordering Cost** vs. **Holding Cost**.
 - [ ] Point to Slide 1 & Slide 2 on the screen when introducing the 100-SKU Kaggle dataset.

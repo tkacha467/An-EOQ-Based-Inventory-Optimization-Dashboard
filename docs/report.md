@@ -1,6 +1,11 @@
 # Smart Inventory Advisor: Technical & Executive Report
-**Course**: MSc Data Science — Modelling in Operations Management (05MD0302)  
-**Project**: Problem 1 — Smart Inventory Advisor (EOQ Dashboard)  
+**Course**: MSc Data Science — Modelling in Operations Management (05MD0302), Semester 3  
+**Event**: MOM Mini-Hackathon  
+**Faculty Guide**: Prof. Rushika Ma'am  
+**Team Members**:
+1. **Tushar Pankajbhai Kacha** (Student ID: `92500567015`)
+2. **Isha Kakadiya** (Student ID: `92500567016`)
+3. **Kaushik Ajani** (Student ID: `92500567020`)  
 **Date**: September 2026  
 
 ---
@@ -8,7 +13,7 @@
 ## 1. Introduction & Problem Statement
 Inventory management requires balancing ordering execution costs against inventory carrying costs. In modern supply chain operations, purchasing in excessively large batches inflates holding expenses and ties up working capital, while purchasing in tiny batches skyrockets shipping and administrative costs.
 
-The **Smart Inventory Advisor** is an enterprise analytics dashboard designed to process real supply chain data, calculate the **Economic Order Quantity (EOQ)**, **Reorder Point (ROP)**, and **Total Annual Inventory Cost**, providing quantitative replenishment guidance for supply chain decision-makers.
+The **Smart Inventory Advisor** is an enterprise analytics dashboard designed for the MOM Mini-Hackathon under the guidance of Prof. Rushika Ma'am. It processes real supply chain data, calculates the **Economic Order Quantity (EOQ)**, **Reorder Point (ROP)**, and **Total Annual Inventory Cost**, providing quantitative replenishment guidance for supply chain decision-makers.
 
 ---
 
@@ -16,7 +21,7 @@ The **Smart Inventory Advisor** is an enterprise analytics dashboard designed to
 1. Develop a mathematical backend (`eoq_model.py`) and data transformation pipeline (`data_pipeline.py`) to process real-world inventory data.
 2. Calculate optimal batch size (EOQ), order frequency, total annual cost, daily demand, and reorder threshold (ROP) for every SKU.
 3. Distinguish clearly between raw dataset inputs and derived cost assumptions.
-4. Render a SaaS-grade Streamlit visual interface (`app.py`) featuring high-level KPI cards, interactive Plotly cost-tradeoff curves, portfolio cost distributions, and dynamic business recommendations.
+4. Render a SaaS-grade Streamlit visual interface (`app.py`) and an interactive presentation frontend (`index.html`) featuring high-level KPI cards, interactive Plotly/Chart.js cost-tradeoff curves, portfolio cost distributions, and dynamic business recommendations.
 
 ---
 
@@ -115,7 +120,7 @@ data_pipeline.py (ETL Cleaning & Derivations)
          ↓
 eoq_model.py (Vectorized NumPy/pandas Calculation)
          ↓
-app.py (Streamlit SaaS Dashboard UI)
+Dual Interface: app.py (Streamlit) & index.html (Light Presentation Frontend)
 ```
 
 ---
@@ -127,8 +132,8 @@ app.py (Streamlit SaaS Dashboard UI)
 ---
 
 ## 12. Dashboard Architecture
-The Streamlit interface (`app.py`) follows a non-intrusive SaaS layout:
-- **Header**: Status badge and data source information expander.
+The interface follows a SaaS layout:
+- **Header**: Team member badges (`Tushar`, `Isha`, `Kaushik`), Faculty guide (`Prof. Rushika Ma'am`), and event tag (`MOM Mini-Hackathon`).
 - **Top KPI Cards**: Total Active SKUs (100), Average EOQ (456.9 units), Total Portfolio Cost ($44,228.32), High-Cost Focus SKUs count.
 - **Interactive Visualizations**: High on the page (EOQ Cost Tradeoff curve and Top 15 SKU Cost bar chart).
 - **Business Insights & Recommendations**: Dynamic bullet points highlighting specific SKUs.
@@ -146,41 +151,7 @@ The Streamlit interface (`app.py`) follows a non-intrusive SaaS layout:
 | **SKU3 (Skincare)** | 5,901 | $33.09 | $6.262 | 21 days | **249.77** | 23.63 | **$1,563.85** | **339.51** |
 | **SKU4 (Haircare)** | 2,906 | $10.26 | $10.650 | 6 days | **74.92** | 38.79 | **$797.87** | **47.77** |
 
-**Portfolio Totals**:
-- **Total SKUs**: 100
-- **Total Portfolio Annual Inventory Cost**: **$44,228.32**
-
 ---
 
-## 14. Visualization
-1. **Cost Trade-Off Curve**: Confirms that ordering cost declines hyper-bolically with batch size while holding cost increases linearly. The intersection marks the exact optimal EOQ point.
-2. **Top SKU Cost Bar Chart**: Identifies portfolio cost concentrations, highlighting top financial commitments for inventory optimization.
-
----
-
-## 15. Business Insights
-- **Cost Driver Identification**: Inventory costs in the dataset vary significantly based on SKU-specific manufacturing costs ($C$) and shipping expenses ($S$).
-- **Holding vs. Ordering Balance**: SKUs with high unit manufacturing cost require smaller EOQ batch sizes to avoid excessive capital tie-up.
-- **Lead Time Risk**: SKUs with lead times up to 24–28 days require higher reorder points to prevent stockouts.
-
----
-
-## 16. Actionable Recommendation
-1. **Procurement Execution**: Order exactly the calculated **EOQ units** for each selected SKU per replenishment cycle.
-2. **Reorder Triggers**: Automate purchase order triggers in inventory management software when stock reaches the calculated **Reorder Point (ROP)**.
-3. **Carrying Rate Sensitivity**: Periodically review the 20% annual inventory carrying cost rate ($i$) as warehouse overhead or interest rates change.
-
----
-
-## 17. Limitations
-- **Constant Demand Assumption**: Annual demand is assumed steady throughout 365 days.
-- **Derived Carrying Rate**: Holding cost relies on an assumed 20% annual carrying rate applied to manufacturing cost ($H = 0.20 \times C$).
-
----
-
-## 18. Conclusion & Future Enhancements
-The **Smart Inventory Advisor** successfully integrates real-world Kaggle supply chain data into a validated mathematical EOQ model delivered through a SaaS Streamlit interface. 
-
-**Future Enhancements**:
-1. Incorporate safety stock based on demand variance ($Z \times \sigma_D \times \sqrt{L}$).
-2. Integrate real-time supplier API webhooks for dynamic lead time updates.
+## 14. Conclusion
+The **Smart Inventory Advisor** successfully integrates real-world Kaggle supply chain data into a validated mathematical EOQ model delivered through a responsive frontend designed for the MSc Data Science MOM Mini-Hackathon under the guidance of Prof. Rushika Ma'am.

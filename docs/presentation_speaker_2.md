@@ -1,5 +1,7 @@
 # 🎙️ Presentation Script — Speaker 2: Mathematical Model, Data Pipeline & Tech Stack
-**Speaker**: Team Member 2 (Mathematical Formulation, Libraries, & Pipeline Architecture)  
+**Speaker**: Isha Kakadiya (Student ID: `92500567016`)  
+**Faculty Evaluator**: Prof. Rushika Ma'am  
+**Course & Event**: MOM Mini-Hackathon (MSc Data Science, Sem 3)  
 **Duration**: 2.5 to 3 Minutes (~350 - 400 words)  
 **Slides Covered**: Slide 3 (Architecture & Formulas) & Slide 4 (Code Inspector)
 
@@ -8,7 +10,7 @@
 ## 📜 Word-for-Word Speech Script
 
 ### 1. Mathematical Formulation & EOQ Model (0:00 - 1:00)
-> *"Thank you, [Speaker 1 Name]. Hello everyone, I am [Speaker 2 Name], and I will walk you through the mathematical engine and technical architecture of our system.*
+> *"Thank you, Tushar. Respected Prof. Rushika Ma'am and classmates, I am **Isha Kakadiya**, and I will walk you through the mathematical engine and technical architecture of our system.*
 >
 > *At the heart of our backend is the classical **Economic Order Quantity (EOQ)** model. The total annual inventory cost equation is:
 > $$TC = \left(\frac{D}{Q} \cdot S\right) + \left(\frac{Q}{2} \cdot H\right)$$
@@ -44,11 +46,11 @@
 >
 > *To guarantee mathematical accuracy, we followed **Test-Driven Development (TDD)** and built a 10-test unit suite in `test_eoq_model.py`. It tests column validation, zero/negative input rejection, EOQ precision, cost equity at $Q^*$, and pipeline cleaning. All 10 tests pass cleanly in under 0.05 seconds.*
 >
-> *Now, I pass the mic to [Speaker 3 Name] to demonstrate our dashboard in action and share our key takeaways."*
+> *Now, I pass the mic to **Kaushik Ajani** to demonstrate our dashboard in action and share our key takeaways."*
 
 ---
 
-## 🎯 Quick Delivery Checklist for Speaker 2
+## 🎯 Quick Delivery Checklist for Speaker 2 (Isha)
 - [ ] Refer to Slide 3 (Architecture & Formulas) when explaining $Q^* = \sqrt{2DS/H}$.
 - [ ] Clearly explain the derived holding cost formula ($H = i \times C$).
 - [ ] Mention key Python libraries (**NumPy, pandas, Streamlit, Plotly, unittest**).

@@ -1,26 +1,31 @@
 # 🎬 Master Presentation Guide & Full Group Script
 **Project**: Smart Inventory Advisor — EOQ-Based Inventory Optimization Dashboard  
-**Course**: MSc Data Science — Modelling in Operations Management (05MD0302)  
+**Event**: MOM Mini-Hackathon (Modelling in Operations Management)  
+**Faculty Evaluator**: Prof. Rushika Ma'am  
+**Course**: MSc Data Science — Semester 3  
 **Total Group Duration**: 7.5 to 9 Minutes (2.5 - 3 Minutes per Speaker)  
-**Team Members**: 3 Presenters (Speaker 1, Speaker 2, Speaker 3)
+**Team Members**:
+1. **Speaker 1**: Tushar Pankajbhai Kacha (Student ID: `92500567015`)
+2. **Speaker 2**: Isha Kakadiya (Student ID: `92500567016`)
+3. **Speaker 3**: Kaushik Ajani (Student ID: `92500567020`)
 
 ---
 
 ## 👥 Speaker Roles & Agenda Overview
 
-| Speaker | Section / Agenda | Key Topics Covered | Target Time |
-|---|---|---|---|
-| **Speaker 1** | **Introduction & Problem Definition** | Why this topic, Project Scope, Core Inventory Cost Trade-off (Ordering vs. Holding Costs) | 2.5 - 3.0 min |
-| **Speaker 2** | **Mathematical Model & Architecture** | EOQ Formula ($Q^*$), Reorder Point ($ROP$), Data Pipeline ($data\_pipeline.py$), Tech Stack (NumPy, pandas, Streamlit, Plotly), Unit Testing | 2.5 - 3.0 min |
-| **Speaker 3** | **Live Demo, Analytics & Learnings** | Live Calculator Simulation, Cost Curves, Portfolio Insights, 3 Key Team Learnings, Conclusion & Q&A | 2.5 - 3.0 min |
+| Speaker | Name & ID | Section / Agenda | Key Topics Covered | Target Time |
+|---|---|---|---|---|
+| **Speaker 1** | **Tushar Kacha** (`92500567015`) | **Introduction & Problem Definition** | Why this topic, Project Scope, Core Inventory Cost Trade-off (Ordering vs. Holding Costs) | 2.5 - 3.0 min |
+| **Speaker 2** | **Isha Kakadiya** (`92500567016`) | **Mathematical Model & Architecture** | EOQ Formula ($Q^*$), Reorder Point ($ROP$), Data Pipeline ($data\_pipeline.py$), Tech Stack (NumPy, pandas, Streamlit, Plotly), Unit Testing | 2.5 - 3.0 min |
+| **Speaker 3** | **Kaushik Ajani** (`92500567020`) | **Live Demo, Analytics & Learnings** | Live Calculator Simulation, Cost Curves, Portfolio Insights, 3 Key Team Learnings, Conclusion & Q&A | 2.5 - 3.0 min |
 
 ---
 
 # 🎙️ Complete Group Presentation Script
 
-## 👤 Speaker 1: Problem Definition & Business Context (2.5 - 3 min)
+## 👤 Speaker 1: Tushar Pankajbhai Kacha (2.5 - 3 min)
 
-> *"Respected Professor and fellow classmates, good morning. Welcome to our MSc Data Science Operations Management presentation. I am [Speaker 1 Name], presenting alongside my team members [Speaker 2 Name] and [Speaker 3 Name].*
+> *"Respected Prof. Rushika Ma'am and fellow classmates, good morning. Welcome to our MSc Data Science Operations Management mini-hackathon presentation. I am **Tushar Pankajbhai Kacha**, presenting alongside my team members **Isha Kakadiya** and **Kaushik Ajani**.*
 >
 > *Today, we are excited to showcase our project: **The Smart Inventory Advisor** — an enterprise-grade inventory optimization dashboard powered by real-world supply chain data.*
 >
@@ -40,13 +45,13 @@
 >
 > *Our system calculates the exact **Economic Order Quantity (EOQ)** — the precise order batch size that minimizes total annual inventory costs — as well as the **Reorder Point (ROP)** to prevent lead-time stockouts.*
 >
-> *Now, I will hand over to my teammate, [Speaker 2 Name], who will explain our mathematical formulation, data pipeline, and technical implementation."*
+> *Now, I will hand over to my teammate, **Isha Kakadiya**, who will explain our mathematical formulation, data pipeline, and technical implementation."*
 
 ---
 
-## 👤 Speaker 2: Mathematical Model, Data Pipeline & Tech Stack (2.5 - 3 min)
+## 👤 Speaker 2: Isha Kakadiya (2.5 - 3 min)
 
-> *"Thank you, [Speaker 1 Name]. Hello everyone, I am [Speaker 2 Name], and I will walk you through the mathematical engine and technical architecture of our system.*
+> *"Thank you, Tushar. Respected Prof. Rushika Ma'am and classmates, I am **Isha Kakadiya**, and I will walk you through the mathematical engine and technical architecture of our system.*
 >
 > *At the heart of our backend is the classical **Economic Order Quantity (EOQ)** model. The total annual inventory cost equation is:
 > $$TC = \left(\frac{D}{Q} \cdot S\right) + \left(\frac{Q}{2} \cdot H\right)$$
@@ -76,13 +81,13 @@
 >
 > *To guarantee mathematical accuracy, we followed **Test-Driven Development (TDD)** and built a 10-test unit suite in `test_eoq_model.py`. It tests column validation, zero/negative input rejection, EOQ precision, cost equity at $Q^*$, and pipeline cleaning. All 10 tests pass cleanly in under 0.05 seconds.*
 >
-> *Now, I pass the mic to [Speaker 3 Name] to demonstrate our dashboard in action and share our key takeaways."*
+> *Now, I pass the mic to **Kaushik Ajani** to demonstrate our dashboard in action and share our key takeaways."*
 
 ---
 
-## 👤 Speaker 3: Live Demo, Visual Analytics & Key Learnings (2.5 - 3 min)
+## 👤 Speaker 3: Kaushik Ajani (2.5 - 3 min)
 
-> *"Thank you, [Speaker 2 Name]. Hello everyone, I am [Speaker 3 Name], and I will demonstrate our live system in action and summarize our findings.*
+> *"Thank you, Isha. Respected Prof. Rushika Ma'am and classmates, I am **Kaushik Ajani**, and I will demonstrate our live system in action and summarize our findings.*
 >
 > *As you can see on Slide 5, our **Live EOQ & Reorder Point Calculator** allows supply chain managers to select any SKU preset from our 100 real Kaggle SKUs or manually enter custom parameters.*
 >
@@ -102,4 +107,4 @@
 >
 > *In conclusion, the Smart Inventory Advisor empowers organizations to minimize inventory expenses, eliminate stockouts, and make data-driven supply chain decisions.*
 >
-> *Thank you for your time. We are now ready to take any questions!"*
+> *Thank you, Prof. Rushika Ma'am and classmates, for your time. We are now ready to take any questions!"*

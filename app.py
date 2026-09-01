@@ -1,7 +1,8 @@
 """
 Smart Inventory Advisor - Streamlit Frontend Application
-EOQ-Based Inventory Optimization Dashboard inspired by CNN-ECO Case Study UI Theme.
-Presenter: Tushar Pankajbhai Kacha | MSc Data Science
+EOQ-Based Inventory Optimization Dashboard for MOM Mini-Hackathon.
+Faculty Guide: Prof. Rushika Ma'am | Course: MSc Data Science (Sem 3)
+Team: Tushar Pankajbhai Kacha (92500567015), Isha Kakadiya (92500567016), Kaushik Ajani (92500567020)
 """
 
 import os
@@ -16,7 +17,7 @@ import data_pipeline
 
 # Page Configuration
 st.set_page_config(
-    page_title="Smart Inventory Advisor | EOQ Analytics Dashboard",
+    page_title="Smart Inventory Advisor | MOM Mini-Hackathon Dashboard",
     page_icon="📦",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -38,11 +39,10 @@ st.markdown("""
         --bg-card: #ffffff;
         --bg-card-hover: #f1f5f9;
         --border-color: #e2e8f0;
-        --border-glow: rgba(16, 185, 129, 0.4);
+        --border-glow: rgba(5, 150, 105, 0.4);
         
         --accent-emerald: #059669;
         --accent-emerald-light: #ecfdf5;
-        --accent-emerald-glow: rgba(5, 150, 105, 0.25);
         --accent-cyan: #0284c7;
         --accent-indigo: #4f46e5;
         --accent-amber: #d97706;
@@ -73,7 +73,7 @@ st.markdown("""
 
     /* Top Navigation Banner */
     .top-navbar {
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba(255, 255, 255, 0.98);
         border: 1px solid var(--border-color);
         border-radius: var(--radius-md);
         padding: 1rem 1.5rem;
@@ -264,8 +264,8 @@ st.markdown("""
 # ------------------------------------------------------------------------------
 # SIDEBAR NAVIGATION & DATA PIPELINE
 # ------------------------------------------------------------------------------
-st.sidebar.markdown("## <i class='fa-solid fa-boxes-packing' style='color:#059669;'></i> CNN-EOQ ADVISOR", unsafe_allow_html=True)
-st.sidebar.markdown("*Supply Chain Inventory Optimization*")
+st.sidebar.markdown("## <i class='fa-solid fa-boxes-stacked' style='color:#059669;'></i> SMART EOQ", unsafe_allow_html=True)
+st.sidebar.markdown("*MOM Mini-Hackathon | MSc DS (Sem 3)*")
 st.sidebar.markdown("---")
 
 nav_selection = st.sidebar.radio(
@@ -329,10 +329,10 @@ product_data = calc_df[calc_df['Product'] == selected_sku].iloc[0]
 st.markdown(f"""
 <div class="top-navbar">
     <div class="nav-brand">
-        <span class="logo-badge"><i class="fa-solid fa-truck-ramp-box"></i> EOQ-SMART</span>
+        <span class="logo-badge"><i class="fa-solid fa-boxes-stacked"></i> SMART EOQ</span>
         <div>
             <div class="brand-title">Smart Inventory Advisor & Decision Support</div>
-            <div class="brand-sub">Presenter: Tushar Pankajbhai Kacha (ID: 92500567015) | MSc Data Science</div>
+            <div class="brand-sub">MOM Mini-Hackathon | Faculty Guide: Prof. Rushika Ma'am | MSc DS (Sem 3)</div>
         </div>
     </div>
     <div style="display:flex; align-items:center; gap: 0.8rem;">
@@ -342,13 +342,24 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# Hero Header & Meta Pills
+# Hero Header & Team Meta Pills
 st.markdown(f"""
 <div class="meta-pill-container">
-    <span class="meta-pill highlight"><i class="fa-solid fa-user-graduate"></i> Presenter: Tushar Pankajbhai Kacha</span>
-    <span class="meta-pill"><i class="fa-solid fa-id-card"></i> Student ID: 92500567015</span>
-    <span class="meta-pill"><i class="fa-solid fa-brain"></i> Model: Economic Order Quantity (EOQ) + ROP</span>
-    <span class="meta-pill"><i class="fa-solid fa-bullseye"></i> Target: Cost Minimization & Replenishment</span>
+    <span class="meta-pill highlight"><i class="fa-solid fa-trophy"></i> MOM Mini-Hackathon</span>
+    <span class="meta-pill"><i class="fa-solid fa-user-tie"></i> Faculty Guide: Prof. Rushika Ma'am</span>
+    <span class="meta-pill"><i class="fa-solid fa-graduation-cap"></i> MSc Data Science (Sem 3)</span>
+</div>
+
+<div style="display: flex; gap: 0.6rem; margin-bottom: 1.25rem; flex-wrap: wrap;">
+    <span class="meta-pill" style="background:#ecfdf5; border-color:#a7f3d0; color:#047857; font-weight:700;">
+        <i class="fa-solid fa-user-graduate"></i> Tushar Pankajbhai Kacha (92500567015)
+    </span>
+    <span class="meta-pill" style="background:#eff6ff; border-color:#bfdbfe; color:#1d4ed8; font-weight:700;">
+        <i class="fa-solid fa-user-graduate"></i> Isha Kakadiya (92500567016)
+    </span>
+    <span class="meta-pill" style="background:#fdf2f8; border-color:#fbcfe8; color:#be185d; font-weight:700;">
+        <i class="fa-solid fa-user-graduate"></i> Kaushik Ajani (92500567020)
+    </span>
 </div>
 
 <h1 class="hero-title">
@@ -356,7 +367,7 @@ st.markdown(f"""
     Powered by EOQ Engine
 </h1>
 <p class="hero-subtitle">
-    An intelligent operations management decision framework balancing purchase ordering costs against inventory holding carrying expenses. Leveraging real-world Kaggle supply chain data to optimize lot sizes and prevent lead-time stockouts.
+    An intelligent operations management decision framework balancing purchase ordering costs against inventory holding carrying expenses. Developed for the MOM Mini-Hackathon (MSc Data Science, Sem 3) under the guidance of Prof. Rushika Ma'am.
 </p>
 
 <div class="category-badges">

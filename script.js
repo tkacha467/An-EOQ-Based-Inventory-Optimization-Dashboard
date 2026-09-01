@@ -1,6 +1,7 @@
 /* ==========================================================================
    Smart Inventory Advisor - Interactive Presentation & Dashboard Engine
-   Author: Tushar Pankajbhai Kacha (ID: 92500567015) | MSc Data Science
+   MOM Mini-Hackathon | MSc Data Science (Semester 3) | Guide: Prof. Rushika Ma'am
+   Team: Tushar Pankajbhai Kacha (92500567015), Isha Kakadiya (92500567016), Kaushik Ajani (92500567020)
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -70,7 +71,9 @@ import pandas as pd
 
 def calculate_eoq(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Computes vectorized EOQ and Reorder Point metrics across inventory items.
+    MOM Mini-Hackathon - EOQ Optimization Engine
+    Faculty Guide: Prof. Rushika Ma'am
+    Team: Tushar Kacha (015), Isha Kakadiya (016), Kaushik Ajani (020)
     """
     validate_input_dataframe(df)
     result = df.copy()
@@ -133,7 +136,7 @@ if __name__ == '__main__':
         input: {
             title: "Data Pipeline & Cleaning (`data_pipeline.py`)",
             icon: "fa-file-import",
-            desc: "Ingests raw Kaggle 100-SKU dataset, scrubs nulls and non-positive numbers, maps shipping costs to ordering expenses ($S$), and derives unit holding cost ($H = 0.20 \times C$)."
+            desc: "Ingests raw Kaggle 100-SKU dataset, scrubs nulls and non-positive numbers, maps shipping costs to ordering expenses ($S$), and derives unit holding cost ($H = 0.20 \\times C$)."
         },
         eoq: {
             title: "Vectorized EOQ Formula Module (`eoq_model.py`)",
