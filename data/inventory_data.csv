@@ -1,0 +1,7 @@
+Product,Annual_Demand,Ordering_Cost,Holding_Cost,Lead_Time_Days
+Laptop,1200,500,50,10
+Monitor,1800,350,40,7
+Keyboard,3000,150,20,5
+Mouse,4000,100,15,4
+Printer,800,450,60,12
+Headset,2500,120,18,6
