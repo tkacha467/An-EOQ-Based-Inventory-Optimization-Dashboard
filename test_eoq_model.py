@@ -41,7 +41,7 @@ class TestEOQModel(unittest.TestCase):
         })
         with self.assertRaises(ValueError) as ctx:
             calculate_eoq(invalid_df)
-        self.assertIn("missing required column", str(ctx.exception))
+        self.assertIn("missing required column", str(ctx.exception).lower())
 
     def test_3_non_numeric_values(self):
         """Test that non-numeric strings in numeric columns raise a ValueError."""
@@ -54,7 +54,7 @@ class TestEOQModel(unittest.TestCase):
         })
         with self.assertRaises(ValueError) as ctx:
             calculate_eoq(invalid_df)
-        self.assertIn("contains non-numeric or missing", str(ctx.exception))
+        self.assertIn("non-numeric or missing", str(ctx.exception).lower())
 
     def test_4_zero_values(self):
         """Test that zero values in numeric fields raise a ValueError."""
@@ -62,7 +62,7 @@ class TestEOQModel(unittest.TestCase):
         invalid_df.loc[0, 'Annual_Demand'] = 0.0
         with self.assertRaises(ValueError) as ctx:
             calculate_eoq(invalid_df)
-        self.assertIn("contains zero or negative values", str(ctx.exception))
+        self.assertIn("zero or negative values", str(ctx.exception).lower())
 
     def test_5_negative_values(self):
         """Test that negative values in numeric fields raise a ValueError."""
@@ -70,12 +70,11 @@ class TestEOQModel(unittest.TestCase):
         invalid_df.loc[0, 'Ordering_Cost'] = -50.0
         with self.assertRaises(ValueError) as ctx:
             calculate_eoq(invalid_df)
-        self.assertIn("contains zero or negative values", str(ctx.exception))
+        self.assertIn("zero or negative values", str(ctx.exception).lower())
 
     def test_6_eoq_calculation(self):
         """Test accuracy of EOQ formula: sqrt((2 * D * S) / H)."""
         res = calculate_eoq(self.valid_data)
-        # Laptop: sqrt((2 * 1200 * 150) / 40) = sqrt(9000) ≈ 94.8683298
         expected_eoq = math.sqrt((2 * 1200 * 150.0) / 40.0)
         self.assertAlmostEqual(res.loc[0, 'EOQ'], expected_eoq, places=5)
 

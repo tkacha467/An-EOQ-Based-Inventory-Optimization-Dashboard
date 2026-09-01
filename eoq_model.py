@@ -1,4 +1,5 @@
 import math
+import numpy as np
 import pandas as pd
 
 REQUIRED_COLUMNS = [
@@ -29,9 +30,9 @@ def validate_input_dataframe(df: pd.DataFrame) -> None:
     for col in NUMERIC_COLUMNS:
         values = pd.to_numeric(df[col], errors="coerce")
         if values.isna().any():
-            raise ValueError(f"Column '{col}' must contain only numeric values.")
+            raise ValueError(f"Column '{col}' contains non-numeric or missing (NaN) values.")
         if (values <= 0).any():
-            raise ValueError(f"Column '{col}' must contain only positive values.")
+            raise ValueError(f"Column '{col}' contains zero or negative values. All values must be positive (> 0).")
 
 
 def calculate_eoq(df: pd.DataFrame) -> pd.DataFrame:
@@ -51,36 +52,54 @@ def calculate_eoq(df: pd.DataFrame) -> pd.DataFrame:
     result["Total_Annual_Inventory_Cost"] = (
         result["Annual_Ordering_Cost"] + result["Annual_Holding_Cost"]
     )
-    result["Daily_Demand"] = d / 365
+    result["Daily_Demand"] = d / 365.0
     result["Reorder_Point"] = result["Daily_Demand"] * lead
 
     return result
 
 
-def calculate_cost_tradeoff(product_row: pd.Series, points: int = 60) -> pd.DataFrame:
+def calculate_cost_tradeoff(
+    annual_demand=None,
+    ordering_cost=None,
+    holding_cost=None,
+    product_row=None,
+    points: int = 60,
+    num_points: int = None
+) -> pd.DataFrame:
     """Return ordering, holding and total cost over quantities around the EOQ."""
-    d = float(product_row["Annual_Demand"])
-    s = float(product_row["Ordering_Cost"])
-    h = float(product_row["Holding_Cost"])
+    if num_points is not None:
+        points = num_points
+
+    target = product_row if product_row is not None else annual_demand
+
+    if isinstance(target, (pd.Series, dict)):
+        d = float(target["Annual_Demand"])
+        s = float(target["Ordering_Cost"])
+        h = float(target["Holding_Cost"])
+    else:
+        d = float(annual_demand)
+        s = float(ordering_cost)
+        h = float(holding_cost)
+
+    if d <= 0 or s <= 0 or h <= 0:
+        raise ValueError("Annual_Demand, Ordering_Cost, and Holding_Cost must be positive (> 0).")
+
     eoq = math.sqrt((2 * d * s) / h)
 
-    low = max(1, int(eoq * 0.25))
-    high = max(low + 1, int(eoq * 2.0))
-    quantities = pd.Series(range(low, high + 1, max(1, (high - low) // points)))
-    quantities = quantities.drop_duplicates().astype(float)
+    low = max(1.0, eoq * 0.25)
+    high = max(low + 1.0, eoq * 2.0)
+    
+    quantities = np.linspace(low, high, points)
 
     tradeoff = pd.DataFrame({"Order_Quantity": quantities})
-    tradeoff["Ordering_Cost"] = (d / tradeoff["Order_Quantity"]) * s
-    tradeoff["Holding_Cost"] = (tradeoff["Order_Quantity"] / 2) * h
-    tradeoff["Total_Cost"] = tradeoff["Ordering_Cost"] + tradeoff["Holding_Cost"]
-    tradeoff["Is_EOQ"] = tradeoff["Order_Quantity"].eq(round(eoq))
+    tradeoff["Annual_Ordering_Cost"] = (d / tradeoff["Order_Quantity"]) * s
+    tradeoff["Annual_Holding_Cost"] = (tradeoff["Order_Quantity"] / 2.0) * h
+    tradeoff["Total_Annual_Inventory_Cost"] = tradeoff["Annual_Ordering_Cost"] + tradeoff["Annual_Holding_Cost"]
+    
+    # Also support alias column names for compatibility
+    tradeoff["Ordering_Cost"] = tradeoff["Annual_Ordering_Cost"]
+    tradeoff["Holding_Cost"] = tradeoff["Annual_Holding_Cost"]
+    tradeoff["Total_Cost"] = tradeoff["Total_Annual_Inventory_Cost"]
+    tradeoff["Is_EOQ"] = np.isclose(tradeoff["Order_Quantity"], eoq, rtol=1e-2)
 
-    # Ensure the exact EOQ is represented even though the chart uses integer quantities.
-    eoq_row = pd.DataFrame({
-        "Order_Quantity": [eoq],
-        "Ordering_Cost": [(d / eoq) * s],
-        "Holding_Cost": [(eoq / 2) * h],
-        "Total_Cost": [(d / eoq) * s + (eoq / 2) * h],
-        "Is_EOQ": [True],
-    })
-    return pd.concat([tradeoff, eoq_row], ignore_index=True).sort_values("Order_Quantity").reset_index(drop=True)
+    return tradeoff
